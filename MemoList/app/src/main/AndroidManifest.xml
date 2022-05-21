@@ -11,7 +11,8 @@
         android:theme="@style/Theme.MemoList">
         <activity
             android:name=".SubActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustUnspecified"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

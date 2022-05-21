@@ -45,7 +45,7 @@ class MainFragment : Fragment() {
             }
         })
     }
-    private fun recyclerSetup(){
+    fun recyclerSetup(){
         adapter = TitleAdapter(R.layout.title_view)
         val recyclerView: RecyclerView? = view?.findViewById(R.id.titlelistView)
         recyclerView?.layoutManager = LinearLayoutManager(context)

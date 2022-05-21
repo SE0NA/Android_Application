@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
+        binding.fragmentContainerView.getFragment<MainFragment>().recyclerSetup()
+
         setContentView(binding.root)
     }
 
@@ -55,10 +57,14 @@ class MainActivity : AppCompatActivity() {
                 val newTitle = TitleItem(title)
                 val viewModel: TitleModel by viewModels()
                 viewModel.insertTitle(newTitle)
+                binding.fragmentContainerView.getFragment<MainFragment>().recyclerSetup()
             }
         }
         newListDlg.setNegativeButton("취소"){ dialog, which ->
         }
+
+        val dlg = newListDlg.create()
+        dlg.show()
         return super.onOptionsItemSelected(item)
     }
 

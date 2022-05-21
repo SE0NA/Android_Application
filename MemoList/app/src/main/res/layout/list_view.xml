@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/listRadio"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/listViewGroup"
@@ -14,18 +14,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"/>
-        <RadioButton
-            android:id="@+id/radioButton"
+        <CheckBox
+            android:id="@+id/checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:text=""/>
         <EditText
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listText"
+            android:id="@+id/listTextEdit"
             android:textColor="@color/black"
             android:textSize="20dp"/>
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:id="@+id/listupdateBtn"
+            android:visibility="gone"/>
     </LinearLayout>
 </FrameLayout>

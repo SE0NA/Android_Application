@@ -1,6 +1,7 @@
 package com.example.memolist.ui.main
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class TitleAdapter(private val titleLayout: Int): RecyclerView.Adapter<TitleAdap
             holder.group.setOnClickListener {   // 클릭시 세부 list Activity 이동
                 val intent = Intent(holder.itemView?.context, SubActivity::class.java)
                 intent.putExtra("titleId", holder.titleid.text.toString().toInt())
+                intent.putExtra("title", holder.titleText.text.toString())
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
             }
         }

@@ -1,6 +1,7 @@
 package com.example.memolist
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
@@ -71,6 +73,15 @@ class SubActivity : AppCompatActivity() {
                     }
                 }
                 editTitleDlg.setNegativeButton("취소"){ dialog, which ->
+                }
+                editTitleDlg.setNeutralButton("삭제"){ dialog, which ->
+                    val listViewModel: ListModel by viewModels()
+                    listViewModel.deleteAllList(titleid)
+                    val titleViewModel: TitleModel by viewModels()
+                    titleViewModel.deleteTitle(titleid)
+                    val mainintent = Intent(this, MainActivity::class.java)
+                    startActivity(mainintent)
+                    Toast.makeText(applicationContext, "삭제되었습니다!", Toast.LENGTH_SHORT)
                 }
                 val dlg = editTitleDlg.create()
                 dlg.show()

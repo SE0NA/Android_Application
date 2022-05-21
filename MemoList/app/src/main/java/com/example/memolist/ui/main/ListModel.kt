@@ -27,4 +27,7 @@ class ListModel(application: Application): AndroidViewModel(application) {
     fun updateList(listItem: ListItem){
         repository.updateList(listItem)
     }
+    fun deleteAllList(titleid: Int){
+        repository.deleteAllListIn(titleid)
+    }
 }

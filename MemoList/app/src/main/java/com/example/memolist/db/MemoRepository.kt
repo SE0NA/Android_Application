@@ -89,4 +89,13 @@ class MemoRepository(application: Application) {
     private suspend fun asyncUpdateList(listItem: ListItem){
         listDao?.updateList(listItem)
     }
+
+    fun deleteAllListIn(titleid: Int){
+        coroutineScope.launch(Dispatchers.IO){
+            asyncDeleteAllListIn(titleid)
+        }
+    }
+    private suspend fun asyncDeleteAllListIn(titleid: Int){
+        listDao?.deleteListByTitle(titleid)
+    }
 }

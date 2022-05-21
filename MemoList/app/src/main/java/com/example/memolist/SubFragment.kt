@@ -2,7 +2,6 @@ package com.example.memolist
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,14 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.memolist.databinding.FragmentSubBinding
 import com.example.memolist.db.ListItem
 import com.example.memolist.ui.main.ListAdapter
 import com.example.memolist.ui.main.ListModel
+import com.example.memolist.ui.main.SwipeHelperCallback
 
 class SubFragment : Fragment(), OnListClick{
     var adapter: ListAdapter? = null
@@ -45,6 +46,14 @@ class SubFragment : Fragment(), OnListClick{
         super.onActivityCreated(savedInstanceState)
         observerSetup()
         recyclerSetup()
+        val swipeHelperCallback = SwipeHelperCallback(adapter!!).apply {
+            setClamp(resources.displayMetrics.widthPixels.toFloat()/4)
+        }
+        ItemTouchHelper(swipeHelperCallback).attachToRecyclerView(binding.listlistView)
+        binding.listlistView.setOnTouchListener { _, _ ->
+            swipeHelperCallback.removePreviousClamp(binding.listlistView)
+            false
+        }
     }
 
     private fun observerSetup(){

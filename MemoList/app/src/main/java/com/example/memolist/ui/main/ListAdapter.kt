@@ -6,9 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
+import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.example.memolist.OnListClick
@@ -54,6 +52,10 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
                 }
                 holder.updateBtn.visibility = View.GONE
             }
+            holder.deleteBtn.setOnClickListener {   // 삭제 클릭
+                mycallback.deleteList(thisitem.id)
+                notifyItemRemoved(thisitem.id)
+            }
         }
     }
 
@@ -76,5 +78,7 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
         var checkbox: CheckBox = itemView.findViewById(R.id.checkbox)
         var editText: EditText = itemView.findViewById(R.id.listTextEdit)
         var updateBtn: Button = itemView.findViewById(R.id.listupdateBtn)
+        var deleteBtn: ImageView = itemView.findViewById(R.id.deletelist)
+        var listViewGroup: LinearLayout = itemView.findViewById(R.id.listViewGroup)
     }
 }

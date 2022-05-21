@@ -19,7 +19,7 @@ class ListModel(application: Application): AndroidViewModel(application) {
         repository.insertList(listItem)
     }
     fun deleteList(id: Int){
-        repository.deleteTitle(id)
+        repository.deleteList(id)
     }
     fun getAllLists(titleid: Int): LiveData<List<ListItem>>?{
         return repository.getAllList(titleid)

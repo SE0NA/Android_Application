@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:id="@+id/titleViewGroup">
+        android:id="@+id/titleViewGroup"
+        android:background="?attr/selectableItemBackground">
         <TextView
             android:id="@+id/titleId"
             android:layout_width="wrap_content"

@@ -72,8 +72,6 @@ class SubActivity : AppCompatActivity() {
                         binding.toolbar2.title = TitleEditText.text.toString()
                     }
                 }
-                editTitleDlg.setNegativeButton("취소"){ dialog, which ->
-                }
                 editTitleDlg.setNeutralButton("삭제"){ dialog, which ->
                     val listViewModel: ListModel by viewModels()
                     listViewModel.deleteAllList(titleid)
@@ -84,6 +82,7 @@ class SubActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "삭제되었습니다!", Toast.LENGTH_SHORT)
                 }
                 val dlg = editTitleDlg.create()
+                dlg.setContentView(R.layout.dialog_bg)
                 dlg.show()
             }
             R.id.addNewList -> {    // 새로운 list 추가

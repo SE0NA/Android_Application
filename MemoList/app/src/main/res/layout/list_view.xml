@@ -37,7 +37,7 @@
         android:layout_margin="5dp"
         android:focusable="true"
         android:clickable="true"
-        android:background="@color/white">
+        android:background="?attr/selectableItemBackground">
         <TextView
             android:id="@+id/listViewId"
             android:layout_width="wrap_content"

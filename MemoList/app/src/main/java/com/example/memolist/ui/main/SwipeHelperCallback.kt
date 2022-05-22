@@ -43,7 +43,7 @@ class SwipeHelperCallback(private val adapter: ListAdapter): ItemTouchHelper.Cal
         if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
             val view = getView(viewHolder)
             val isClamped = getTag(viewHolder)
-            val x = clampViewPositionHorizontal(view, dX, isClamped, isCurrentlyActive)
+            val x = clampViewPositionHorizontal(dX, isClamped, isCurrentlyActive)
             if(x == -clamp){
                 getView(viewHolder).animate().translationX(-clamp).setDuration(100L).start()
                 return
@@ -52,7 +52,7 @@ class SwipeHelperCallback(private val adapter: ListAdapter): ItemTouchHelper.Cal
             getDefaultUIUtil().onDraw(c, recyclerView, view, dX, dY, actionState, isCurrentlyActive)
         }
     }
-    fun clampViewPositionHorizontal(view: View, dX:Float, isClamped: Boolean, isCurrentlyActive: Boolean): Float{
+    fun clampViewPositionHorizontal(dX:Float, isClamped: Boolean, isCurrentlyActive: Boolean): Float{
         val max = 0f
         val newX = if(isClamped){
             if(isCurrentlyActive)
@@ -86,7 +86,7 @@ class SwipeHelperCallback(private val adapter: ListAdapter): ItemTouchHelper.Cal
             return
         previousPosition?.let{
             val viewHolder = recyclerView.findViewHolderForAdapterPosition(it)?: return
-            getView(viewHolder).translationX = 0f
+            getView(viewHolder).animate().x(14f).setDuration(100L).start()
             setTag(viewHolder, false)
             previousPosition = null
         }

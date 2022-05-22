@@ -29,15 +29,21 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
                 mycallback.onClick(updatelist)
             }
             holder.editText.setOnFocusChangeListener { view, b ->
-                if(b) {
-                    holder.updateBtn.visibility = View.VISIBLE
+                if(holder.editText.hasFocus()) {
                     holder.editText.setSelection(holder.editText.length())
+                    holder.updateBtn.visibility = View.VISIBLE
+                }
+                else{
+                    Log.i("MYTAG", "nofocus")
+                    mycallback.setSwipe()
+                    holder.updateBtn.visibility = View.GONE
                 }
             }
             holder.editText.addTextChangedListener{
                 if(holder.editText.text.length > 100){
                     holder.editText.text.substring(0, holder.editText.length() -1)
                     holder.editText.setSelection(holder.editText.length())
+                    mycallback.setSwipe()
                 }
             }
             holder.updateBtn.setOnClickListener {
@@ -79,6 +85,5 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
         var editText: EditText = itemView.findViewById(R.id.listTextEdit)
         var updateBtn: Button = itemView.findViewById(R.id.listupdateBtn)
         var deleteBtn: ImageView = itemView.findViewById(R.id.deletelist)
-        var listViewGroup: LinearLayout = itemView.findViewById(R.id.listViewGroup)
     }
 }

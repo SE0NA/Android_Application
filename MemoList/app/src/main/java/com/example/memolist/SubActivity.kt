@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -45,6 +46,11 @@ class SubActivity : AppCompatActivity() {
         val bundle = Bundle()
         bundle.putInt("titleId", titleid)
         binding.fragmentContainerView2.getFragment<SubFragment>().arguments = bundle
+
+        binding.subActivityLayout.setOnClickListener{
+            if(currentFocus != null)
+                currentFocus!!.clearFocus()
+        }
 
         setContentView(binding.root)
     }
@@ -107,7 +113,6 @@ class SubActivity : AppCompatActivity() {
             R.id.addNewList -> {    // 새로운 list 추가
                 binding.listLayoutView.checkbox.isChecked = false
                 binding.listLayoutView.listTextEdit.setText("")
-                binding.newlist.visibility = View.VISIBLE
                 binding.listLayoutView.listTextEdit.requestFocus()
                 binding.listLayoutView.listTextEdit.addTextChangedListener{
                     if(binding.listLayoutView.listTextEdit.text.length > 100){

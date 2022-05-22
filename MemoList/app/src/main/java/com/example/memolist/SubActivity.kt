@@ -1,13 +1,18 @@
 package com.example.memolist
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -34,6 +39,8 @@ class SubActivity : AppCompatActivity() {
         title = intent.getStringExtra("title")!!
         binding.toolbar2.title = title
         setSupportActionBar(binding.toolbar2)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
 
         val bundle = Bundle()
         bundle.putInt("titleId", titleid)
@@ -49,30 +56,43 @@ class SubActivity : AppCompatActivity() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+            android.R.id.home ->{
+                val intenthome = Intent(this,MainActivity::class.java)
+                startActivity(intenthome)
+            }
             R.id.editTitle -> {  // title edit
-                val editTitleDlg = AlertDialog.Builder(this)
-                val TitleEditText = EditText(this)
-                editTitleDlg.setTitle("목록 수정")
-                editTitleDlg.setView(TitleEditText)
-                TitleEditText.setText(title)
-                TitleEditText.addTextChangedListener{
-                    if(TitleEditText.text.toString().length>20){
-                        TitleEditText.setText(
-                            TitleEditText.text.substring(0, TitleEditText.length() -1)
+                val dialog = Dialog(this)
+                dialog.setContentView(R.layout.dialog_edit)
+                val editdlg = dialog.findViewById<EditText>(R.id.dialog_edit_editText)
+                editdlg.addTextChangedListener{
+                    if(editdlg.text.length > 20){
+                        editdlg.setText(
+                            editdlg.text.substring(0, editdlg.length()-1)
                         )
-                        TitleEditText.setSelection(TitleEditText.length())
+                        editdlg.setSelection(editdlg.length())
                     }
                 }
-                editTitleDlg.setPositiveButton("수정"){ dialog, which ->
-                    if(TitleEditText.text.isNotEmpty()) {
-                        val updateTitle = TitleItem(TitleEditText.text.toString())
+                dialog.setTitle("")
+                val positiveBtn = dialog.findViewById<Button>(R.id.dialog_edit_yesButton)
+                positiveBtn.setOnClickListener {
+                    if(editdlg.text.isEmpty()){
+                        Toast.makeText(this, "입력해주세요!", Toast.LENGTH_SHORT)
+                    }
+                    else{
+                        val updateTitle = TitleItem(editdlg.text.toString())
                         updateTitle.id = titleid
                         val viewModel: TitleModel by viewModels()
                         viewModel.updateTitle(updateTitle)
-                        binding.toolbar2.title = TitleEditText.text.toString()
+                        binding.toolbar2.title = editdlg.text.toString()
+                        dialog.dismiss()
                     }
                 }
-                editTitleDlg.setNeutralButton("삭제"){ dialog, which ->
+                val negativeBtn = dialog.findViewById<Button>(R.id.dialog_edit_noButton)
+                negativeBtn.setOnClickListener {
+                    dialog.dismiss()
+                }
+                val deleteBtn = dialog.findViewById<Button>(R.id.dialog_edit_deleteButton)
+                deleteBtn.setOnClickListener {
                     val listViewModel: ListModel by viewModels()
                     listViewModel.deleteAllList(titleid)
                     val titleViewModel: TitleModel by viewModels()
@@ -81,9 +101,8 @@ class SubActivity : AppCompatActivity() {
                     startActivity(mainintent)
                     Toast.makeText(applicationContext, "삭제되었습니다!", Toast.LENGTH_SHORT)
                 }
-                val dlg = editTitleDlg.create()
-                dlg.setContentView(R.layout.dialog_bg)
-                dlg.show()
+                dialog.create()
+                dialog.show()
             }
             R.id.addNewList -> {    // 새로운 list 추가
                 binding.listLayoutView.checkbox.isChecked = false

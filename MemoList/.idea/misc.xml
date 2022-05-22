@@ -9,6 +9,7 @@
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/drawable/round_bg.xml" value="0.347" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/drawable/round_line.xml" value="0.347" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/drawable/round_noline_btn.xml" value="0.347" />
+        <entry key="..\:/Android_Application/MemoList/app/src/main/res/drawable/titlelist_design.xml" value="0.347" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/layout/activity_main.xml" value="0.16523713420787084" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/layout/activity_sub.xml" value="0.3411458333333333" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/layout/dialog.xml" value="0.3411458333333333" />
@@ -17,7 +18,7 @@
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/layout/fragment_main.xml" value="0.16523713420787084" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/layout/fragment_sub.xml" value="0.3411458333333333" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/layout/list_view.xml" value="0.33" />
-        <entry key="..\:/Android_Application/MemoList/app/src/main/res/layout/title_view.xml" value="0.1" />
+        <entry key="..\:/Android_Application/MemoList/app/src/main/res/layout/title_view.xml" value="0.5" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/menu/menumain.xml" value="0.3411458333333333" />
         <entry key="..\:/Android_Application/MemoList/app/src/main/res/menu/menusub.xml" value="0.3411458333333333" />
         <entry key="..\:/Users/seona/AndroidStudioProjects/MemoList/app/src/main/res/layout/activity_main.xml" value="0.16523713420787084" />

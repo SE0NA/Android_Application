@@ -30,7 +30,6 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        binding.titlelistView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL)) // 구분선
         return binding.root
     }
 

@@ -21,16 +21,23 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
             val thisitem: ListItem = it!![position]
             holderlist?.add(holder)
             holder.checkbox.isChecked = it!![position].onoff
-            if(holder.checkbox.isChecked)
+            if(it!![position].onoff) {
                 holder.listViewGroup.setBackgroundResource(R.drawable.round_list_checked)
+                holder.editText.setTextColor(R.color.gray_600.toInt())
+            }
+            else{
+                holder.listViewGroup.setBackgroundResource(R.drawable.round_list_nochecked)
+            }
             holder.editText.setText(it!![position].text)
 
             holder.checkbox.setOnClickListener {    //  체크 박스 클릭
                 val updatelist = ListItem(thisitem.titleid, if(holder.editText.text.isNotEmpty())holder.editText.text.toString() else thisitem.text, holder.checkbox.isChecked)
                 updatelist.id = thisitem.id
                 mycallback.onClick(updatelist)
-                if(holder.checkbox.isChecked)
+                if(updatelist.onoff) {
                     holder.listViewGroup.setBackgroundResource(R.drawable.round_list_checked)
+                    holder.editText.setTextColor(R.color.gray_600.toInt())
+                }
                 else
                     holder.listViewGroup.setBackgroundResource(R.drawable.round_list_nochecked)
             }
@@ -49,7 +56,7 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
                 if(holder.editText.text.length > 100){
                     holder.editText.text.substring(0, holder.editText.length() -1)
                     holder.editText.setSelection(holder.editText.length())
-                    mycallback.setSwipe()
+                    mycallback.setSwipeAll()
                 }
             }
 

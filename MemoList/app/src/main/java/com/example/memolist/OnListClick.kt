@@ -6,5 +6,6 @@ public interface OnListClick {
     fun onClick(listItem: ListItem)
     fun deleteList(id:Int)
     fun setSwipe()
+    fun setSwipeAll()
 }
 

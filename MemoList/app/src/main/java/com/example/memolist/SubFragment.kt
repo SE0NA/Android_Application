@@ -2,6 +2,7 @@ package com.example.memolist
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -60,12 +61,6 @@ class SubFragment : Fragment(), OnListClick{
                 false
             }
         }
-        binding.layout.apply{
-            setOnClickListener {
-                swipeHelperCallback.currentPosition = -1
-                swipeHelperCallback.removePreviousClamp(binding.listlistView)
-            }
-        }
     }
 
     private fun observerSetup(){
@@ -94,6 +89,11 @@ class SubFragment : Fragment(), OnListClick{
     }
 
     override fun setSwipe() {
+        swipeHelperCallback.removePreviousClamp(binding.listlistView)
+    }
+
+    override fun setSwipeAll() {
+        swipeHelperCallback.currentPosition = -1
         swipeHelperCallback.removePreviousClamp(binding.listlistView)
     }
 }

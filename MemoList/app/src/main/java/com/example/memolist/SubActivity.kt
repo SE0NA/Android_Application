@@ -43,6 +43,49 @@ class SubActivity : AppCompatActivity() {
         bundle.putInt("titleId", titleid)
         binding.fragmentContainerView2.getFragment<SubFragment>().arguments = bundle
 
+
+        binding.subActLayout.apply{
+            setOnClickListener {
+                if(binding.newlist.visibility == View.VISIBLE){
+                    if(binding.newEditText.text.isNotEmpty()) {
+                        val newList = ListItem(titleid, binding.newEditText.text.toString(), false)
+                        val viewModel: ListModel by viewModels()
+                        viewModel.insertList(newList)
+                        binding.fragmentContainerView2.getFragment<SubFragment>().recyclerSetup()
+                    }
+                    binding.newlist.visibility = View.GONE
+                    // 키보드 숨기기
+                    var imm: InputMethodManager =
+                        applicationContext.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+                    binding.newEditText.setText("")
+                    binding.subActLayout.isClickable = false
+                }
+            }
+        }
+        binding.subActLayout.isClickable = false
+
+        binding.newListAddBtn.setOnClickListener {
+            if(binding.newlist.visibility == View.VISIBLE){
+                if(binding.newEditText.text.isNotEmpty()) {
+                    val newList = ListItem(titleid, binding.newEditText.text.toString(), false)
+                    val viewModel: ListModel by viewModels()
+                    viewModel.insertList(newList)
+                    binding.fragmentContainerView2.getFragment<SubFragment>().recyclerSetup()
+                    binding.newlist.visibility = View.GONE
+                    // 키보드 숨기기
+                    var imm: InputMethodManager =
+                        applicationContext.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
+                    binding.newEditText.setText("")
+                    binding.subActLayout.isClickable = false
+                }
+                else{
+                    Toast.makeText(this, "내용을 입력해주세요!", Toast.LENGTH_SHORT)
+                }
+            }
+        }
+
         setContentView(binding.root)
     }
 
@@ -103,40 +146,16 @@ class SubActivity : AppCompatActivity() {
             }
             R.id.addNewList -> {    // 새로운 list 추가
                 binding.newlist.visibility = View.VISIBLE
-                binding.listLayoutView.checkbox.isChecked = false
-                binding.listLayoutView.listTextEdit.setText("")
-                binding.listLayoutView.listTextEdit.addTextChangedListener {
-                    if (binding.listLayoutView.listTextEdit.text.length > 100) {
-                        binding.listLayoutView.listTextEdit.text.substring(
+                binding.newEditText.setText("")
+                binding.newEditText.addTextChangedListener {
+                    if (binding.newEditText.text.length > 100) {
+                        binding.newEditText.text.substring(
                             0,
-                            binding.listLayoutView.listTextEdit.length() - 1
+                            binding.newEditText.length() - 1
                         )
                     }
                 }
-                binding.subActivityLayout.setOnClickListener {
-                    binding.listLayoutView.listTextEdit.clearFocus()
-                    if (binding.newlist.visibility == View.VISIBLE) {
-                        if (binding.listLayoutView.listTextEdit.text.isNotEmpty()) {
-                            val newList = ListItem(
-                                titleid,
-                                binding.listLayoutView.listTextEdit.text.toString(),
-                                false
-                            )
-                            val viewModel: ListModel by viewModels()
-                            viewModel.insertList(newList)
-                            binding.listLayoutView.listTextEdit.clearFocus()
-                            // recycler view 갱신
-                            binding.fragmentContainerView2.getFragment<SubFragment>()
-                                .recyclerSetup()
-                        }
-                        binding.newlist.visibility = View.GONE
-                        // 키보드 숨기기
-                        var imm: InputMethodManager =
-                            applicationContext.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                        imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
-                        binding.listLayoutView.listTextEdit.setText("")
-                    }
-                }
+                binding.subActLayout.isClickable = true
             }
         }
         return super.onOptionsItemSelected(item)

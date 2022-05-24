@@ -1,11 +1,8 @@
 package com.example.memolist.ui.main
 
-import android.app.Activity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
@@ -17,25 +14,34 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
 
     private var listList: List<ListItem>? = null
     private val mycallback: OnListClick = listener
+    var holderlist: ArrayList<ViewHolder>? = null
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         listList.let{
             val thisitem: ListItem = it!![position]
+            holderlist?.add(holder)
             holder.checkbox.isChecked = it!![position].onoff
+            if(holder.checkbox.isChecked)
+                holder.listViewGroup.setBackgroundResource(R.drawable.round_list_checked)
             holder.editText.setText(it!![position].text)
+
             holder.checkbox.setOnClickListener {    //  체크 박스 클릭
                 val updatelist = ListItem(thisitem.titleid, if(holder.editText.text.isNotEmpty())holder.editText.text.toString() else thisitem.text, holder.checkbox.isChecked)
                 updatelist.id = thisitem.id
                 mycallback.onClick(updatelist)
+                if(holder.checkbox.isChecked)
+                    holder.listViewGroup.setBackgroundResource(R.drawable.round_list_checked)
+                else
+                    holder.listViewGroup.setBackgroundResource(R.drawable.round_list_nochecked)
             }
+
             holder.editText.setOnFocusChangeListener { view, b ->
                 if(holder.editText.hasFocus()) {
                     holder.editText.setSelection(holder.editText.length())
                     holder.updateBtn.visibility = View.VISIBLE
+                    mycallback.setSwipe()
                 }
                 else{
-                    Log.i("MYTAG", "nofocus")
-                    mycallback.setSwipe()
                     holder.updateBtn.visibility = View.GONE
                 }
             }
@@ -46,18 +52,21 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
                     mycallback.setSwipe()
                 }
             }
+
             holder.updateBtn.setOnClickListener {
                 if(holder.editText.text.isNotEmpty()){
                     val updatelist = ListItem(thisitem.titleid, holder.editText.text.toString(), holder.checkbox.isChecked)
                     updatelist.id = thisitem.id
                     mycallback.onClick(updatelist)
                     holder.editText.clearFocus()
+                    holder.itemView.requestFocus()
                 }
                 else{
                     mycallback.deleteList(thisitem.id)
                 }
                 holder.updateBtn.visibility = View.GONE
             }
+
             holder.deleteBtn.setOnClickListener {   // 삭제 클릭
                 mycallback.deleteList(thisitem.id)
                 notifyItemRemoved(thisitem.id)
@@ -85,5 +94,6 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
         var editText: EditText = itemView.findViewById(R.id.listTextEdit)
         var updateBtn: Button = itemView.findViewById(R.id.listupdateBtn)
         var deleteBtn: ImageView = itemView.findViewById(R.id.deletelist)
+        var listViewGroup: LinearLayout = itemView.findViewById(R.id.listViewGroup)
     }
 }

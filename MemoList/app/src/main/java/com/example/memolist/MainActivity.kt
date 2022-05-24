@@ -1,22 +1,15 @@
 package com.example.memolist
 
 import android.app.Dialog
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
-import androidx.core.widget.addTextChangedListener
 import com.example.memolist.databinding.ActivityMainBinding
-import com.example.memolist.databinding.DialogAddBinding
 import com.example.memolist.db.TitleItem
 import com.example.memolist.ui.main.TitleModel
 

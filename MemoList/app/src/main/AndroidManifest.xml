@@ -12,7 +12,7 @@
         <activity
             android:name=".SubActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustUnspecified"/>
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

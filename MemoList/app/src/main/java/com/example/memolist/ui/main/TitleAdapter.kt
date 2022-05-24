@@ -1,7 +1,6 @@
 package com.example.memolist.ui.main
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.memolist.R
 import com.example.memolist.SubActivity
 import com.example.memolist.db.TitleItem
-import kotlin.coroutines.coroutineContext
 
 class TitleAdapter(private val titleLayout: Int): RecyclerView.Adapter<TitleAdapter.ViewHolder>() {
 

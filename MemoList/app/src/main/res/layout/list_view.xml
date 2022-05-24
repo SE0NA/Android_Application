@@ -19,7 +19,9 @@
             android:layout_margin="6dp"
             android:weightSum="10"
             android:background="@drawable/round"
-            android:backgroundTint="@color/red">
+            android:backgroundTint="@color/red"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -43,8 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="@drawable/round"
-            android:backgroundTint="@color/sky1"
+            android:background="@drawable/round_list_nochecked"
             android:clickable="true"
             android:focusable="true">
 
@@ -59,6 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:button="@drawable/custom_checkbox"
                 android:gravity="center"
                 android:text="" />
 

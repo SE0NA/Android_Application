@@ -9,8 +9,8 @@ import kotlin.math.min
 
 class SwipeHelperCallback(private val adapter: ListAdapter): ItemTouchHelper.Callback() {
 
-    private var currentPosition: Int? = null
-    private var previousPosition: Int? = null
+    var currentPosition: Int? = null
+    var previousPosition: Int? = null
     private var currentDx = 0f
     private var clamp = 0f
 

@@ -1,24 +1,18 @@
 package com.example.memolist
 
 import android.app.Activity
-import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
-import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.view.get
-import androidx.core.view.size
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.memolist.databinding.FragmentSubBinding
-import com.example.memolist.databinding.ListViewBinding
 import com.example.memolist.db.ListItem
 import com.example.memolist.ui.main.ListAdapter
 import com.example.memolist.ui.main.ListModel
@@ -64,6 +58,12 @@ class SubFragment : Fragment(), OnListClick{
             setOnTouchListener { _, _ ->
                 swipeHelperCallback.removePreviousClamp(this)
                 false
+            }
+        }
+        binding.layout.apply{
+            setOnClickListener {
+                swipeHelperCallback.currentPosition = -1
+                swipeHelperCallback.removePreviousClamp(binding.listlistView)
             }
         }
     }

@@ -66,10 +66,8 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:layout_marginRight="5dp"
-            android:background="@null"
-            android:backgroundTint="@color/sky1"
-            android:foreground="@drawable/ic_circle_add"
-            android:foregroundTint="#FFC107"/>
+            android:background="@drawable/ic_circle_add"
+            android:backgroundTint="@color/sky3"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -61,6 +61,10 @@ class SubFragment : Fragment(), OnListClick{
                 false
             }
         }
+        binding.layout.setOnClickListener {
+            Log.i("MYTAG", "layoutClick")
+            setSwipeAll()
+        }
     }
 
     private fun observerSetup(){

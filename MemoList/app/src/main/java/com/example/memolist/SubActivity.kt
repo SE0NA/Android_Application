@@ -3,17 +3,21 @@ package com.example.memolist
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.view.get
 import androidx.core.widget.addTextChangedListener
 import com.example.memolist.databinding.ActivitySubBinding
 import com.example.memolist.db.ListItem
@@ -46,6 +50,7 @@ class SubActivity : AppCompatActivity() {
 
         binding.subActLayout.apply{
             setOnClickListener {
+                binding.fragmentContainerView2.getFragment<SubFragment>().setSwipeAll()
                 if(binding.newlist.visibility == View.VISIBLE){
                     if(binding.newEditText.text.isNotEmpty()) {
                         val newList = ListItem(titleid, binding.newEditText.text.toString(), false)
@@ -59,11 +64,10 @@ class SubActivity : AppCompatActivity() {
                         applicationContext.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
                     binding.newEditText.setText("")
-                    binding.subActLayout.isClickable = false
                 }
+
             }
         }
-        binding.subActLayout.isClickable = false
 
         binding.newListAddBtn.setOnClickListener {
             if(binding.newlist.visibility == View.VISIBLE){
@@ -78,10 +82,9 @@ class SubActivity : AppCompatActivity() {
                         applicationContext.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
                     binding.newEditText.setText("")
-                    binding.subActLayout.isClickable = false
                 }
                 else{
-                    Toast.makeText(this, "내용을 입력해주세요!", Toast.LENGTH_SHORT)
+                    Toast.makeText(this, "내용을 입력해주세요!", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -98,6 +101,7 @@ class SubActivity : AppCompatActivity() {
         when(item.itemId) {
             android.R.id.home -> {
                 val intenthome = Intent(this, MainActivity::class.java)
+                intenthome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intenthome)
             }
             R.id.editTitle -> {  // title edit
@@ -117,7 +121,7 @@ class SubActivity : AppCompatActivity() {
                 val positiveBtn = dialog.findViewById<Button>(R.id.dialog_edit_yesButton)
                 positiveBtn.setOnClickListener {
                     if (editdlg.text.isEmpty()) {
-                        Toast.makeText(this, "입력해주세요!", Toast.LENGTH_SHORT)
+                        Toast.makeText(this, "입력해주세요!", Toast.LENGTH_SHORT).show()
                     } else {
                         val updateTitle = TitleItem(editdlg.text.toString())
                         updateTitle.id = titleid
@@ -139,8 +143,9 @@ class SubActivity : AppCompatActivity() {
                     titleViewModel.deleteTitle(titleid)
                     val mainintent = Intent(this, MainActivity::class.java)
                     startActivity(mainintent)
-                    Toast.makeText(applicationContext, "삭제되었습니다!", Toast.LENGTH_SHORT)
+                    Toast.makeText(applicationContext, "삭제되었습니다!", Toast.LENGTH_SHORT).show()
                 }
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.create()
                 dialog.show()
             }

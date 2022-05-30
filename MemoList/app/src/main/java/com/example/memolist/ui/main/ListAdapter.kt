@@ -1,5 +1,7 @@
 package com.example.memolist.ui.main
 
+import android.nfc.Tag
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +29,7 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
             }
             else{
                 holder.listViewGroup.setBackgroundResource(R.drawable.round_list_nochecked)
+                holder.editText.setTextColor(R.color.sky3.toInt())
             }
             holder.editText.setText(it!![position].text)
 
@@ -40,13 +43,15 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
                 }
                 else
                     holder.listViewGroup.setBackgroundResource(R.drawable.round_list_nochecked)
+                holder.editText.setTextColor(R.color.sky3.toInt())
             }
 
             holder.editText.setOnFocusChangeListener { view, b ->
-                if(holder.editText.hasFocus()) {
+                if(b) {
                     holder.editText.setSelection(holder.editText.length())
                     holder.updateBtn.visibility = View.VISIBLE
-                    mycallback.setSwipe()
+                    mycallback.setSwipeAll()
+                    Log.i("MYTAG", "editText focus")
                 }
                 else{
                     holder.updateBtn.visibility = View.GONE
@@ -103,4 +108,5 @@ class ListAdapter(private val listLayout: Int, val listener:OnListClick): Recycl
         var deleteBtn: ImageView = itemView.findViewById(R.id.deletelist)
         var listViewGroup: LinearLayout = itemView.findViewById(R.id.listViewGroup)
     }
+
 }

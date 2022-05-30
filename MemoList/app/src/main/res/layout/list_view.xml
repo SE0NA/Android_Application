@@ -81,11 +81,8 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:layout_marginRight="5dp"
-                android:background="@null"
-                android:backgroundTint="@color/sky1"
-                android:foreground="@drawable/ic_edit_20"
-                android:foregroundTint="@color/purple"
+                android:background="@drawable/ic_edit_20"
+                android:backgroundTint="@color/purple"
                 android:visibility="gone" />
         </LinearLayout>
     </FrameLayout>

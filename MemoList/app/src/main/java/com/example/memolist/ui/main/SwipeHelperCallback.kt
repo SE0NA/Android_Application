@@ -86,7 +86,7 @@ class SwipeHelperCallback(private val adapter: ListAdapter): ItemTouchHelper.Cal
             return
         previousPosition?.let{
             val viewHolder = recyclerView.findViewHolderForAdapterPosition(it)?: return
-            getView(viewHolder).animate().x(14f).setDuration(100L).start()
+            getView(viewHolder).animate().x(10f).setDuration(100L).start()
             setTag(viewHolder, false)
             previousPosition = null
         }

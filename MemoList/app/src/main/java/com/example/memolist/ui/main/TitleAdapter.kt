@@ -24,6 +24,7 @@ class TitleAdapter(private val titleLayout: Int): RecyclerView.Adapter<TitleAdap
                 val intent = Intent(holder.itemView?.context, SubActivity::class.java)
                 intent.putExtra("titleId", holder.titleid.text.toString().toInt())
                 intent.putExtra("title", holder.titleText.text.toString())
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
             }
         }

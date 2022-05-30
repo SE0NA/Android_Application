@@ -1,10 +1,13 @@
 package com.example.memolist
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -41,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         val positiveBtn = dialog.findViewById<Button>(R.id.dialog_add_yesButton)
         positiveBtn.setOnClickListener {
             if(editdlg.text.isEmpty()){
-                Toast.makeText(this, "입력해주세요!", Toast.LENGTH_SHORT)
+                Toast.makeText(this, "입력해주세요!", Toast.LENGTH_SHORT).show()
             }
             else {
                 val title = editdlg.text.toString()
@@ -54,6 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
         val negativeBtn = dialog.findViewById<Button>(R.id.dialog_add_noButton)
         negativeBtn.setOnClickListener { dialog.dismiss() }
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.create()
         dialog.show()
         return super.onOptionsItemSelected(item)

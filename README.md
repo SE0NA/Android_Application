@@ -80,3 +80,7 @@
     <li>(핵심만 골라 배우는)안드로이드 스튜디오 Arctic Fox & 프로그래밍(닐 스미스, 제이펍)</li>
   </ul>
 </h5>
+
+***
+### 메인 코드
+<a href="https://github.com/SE0NA/Android_Application/tree/main/MemoList/app/src/main/java/com/example/memolist"> 메인 소스 경로 </a>
